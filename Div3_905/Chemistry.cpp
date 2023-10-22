@@ -4,17 +4,20 @@ using namespace std;
 #define mod 1000000007
 #define endl '\n'
 
-bool	is_palindrome(map<char, int> &occ, int len)
-{
-	// TODO: test if palindrome
-	return false;
+int	number_of_odd_occ(map<char, int> &occ) {
+	int number = 0;
+	for (auto p: occ)
+		if (p.second % 2)
+			number++;
+	return (number);
 }
 
-void solve(string &s, int len, int to_delete)
-{
+bool solve(string &s, int len, int to_delete) {
 	map<char, int> occ;
 	for (char c: s)
 		occ[c]++;
+	int odd_occs = number_of_odd_occ(occ);
+	return (odd_occs <= to_delete + 1);
 }
 
 int main() {
@@ -26,7 +29,7 @@ int main() {
 	{
 		int n, k; cin >> n >> k;
 		string str; cin >> str;
-		solve(str, n, k);
+		cout << (solve(str, n, k) ? "YES" : "NO") << endl;
 	}
 	return 0;
 }
